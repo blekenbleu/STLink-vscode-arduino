@@ -1,0 +1,8 @@
+stlink.name=STMicroelectronics ST-LINK
+stlink.communication=USB
+stlink.protocol=
+stlink.program.protocol=
+stlink.program.tool=openocd
+stlink.program.tool.default=openocd
+stlink.program.extra_params=
+stlink.programmer.protocol=stlink
