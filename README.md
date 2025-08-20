@@ -12,14 +12,14 @@ I installed [VSCode-Arduino Community](https://marketplace.visualstudio.com/item
 
 ## To enable ST-Link for [VSCode-Arduino](https://blekenbleu.github.io/static/VSCodeArduino/programming.htm):  
 - Download this ZIP and extract to a folder
-- Configure vscode-arduino to find [**arduino-cli**](https://github.com/arduino/arduino-cli/releases/download/v1.3.0/arduino-cli_1.3.0_Windows_64bit.zip) *this folder*.  
-- Download the appropriate arduino-cli release and copy its executible here.
-- `stlink.programmer.transport_script={runtime.platform.path}/debugger/select_hla.cfg`  
-	in `programmers.txt` did not help.  
+- Download an appropriate arduino-cli release and copy its executible here.
+- Configure vscode-arduino to find [**arduino-cli**](https://github.com/arduino/arduino-cli/releases/download/v1.3.0/arduino-cli_1.3.0_Windows_64bit.zip) *in this folder*.  
 - adding `GenF4.programmer.default=stlink` in `boards.txt` was essential to Black Pill uploading.
 	- `Arduino: Upload` and `Arduino CLI: Upload` work;  
 	- `Arduino CLI: Upload using Programmer` does *NOT*  
-- **You must edit** `boards.txt` for other STM32 boards,  
+	- `stlink.programmer.transport_script={runtime.platform.path}/debugger/select_hla.cfg`  
+		in `programmers.txt` did not help.  
+- **You must edit** `boards.txt` to use other STM32 boards,  
 	according to [stm32duino Arduino_Core_STM32 Commit f9a35fd](https://github.com/stm32duino/Arduino_Core_STM32/commit/f9a35fd714b889475e067d8c2c72c551ea3c0cba)
 - Debugging in VSCode-Arduino may be a bridge too far;
 	- [M$ seemingly dropped debugging at version 0.5.0](https://github.com/Tnthr/vscode-arduino-debug#visual-studio-code-extension-for-arduino-the-fork)
