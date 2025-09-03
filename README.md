@@ -1,6 +1,6 @@
 # ST-Link support for VSCode-Arduino
 ### situation
-[Arduino 2 is problematic for me.](https://blekenbleu.github.io/static/Arduino2/)  
+[Arduino 2 was problematic for me.](https://blekenbleu.github.io/static/Arduino2/)  
 I installed [VSCode-Arduino Community](https://marketplace.visualstudio.com/items?itemName=vscode-arduino.vscode-arduino-community) without first uninstalling Arduino 2.  
 - VSCode-Arduino discovered that installation and used it.  
 - programming STM32 boards by ST-Link in that installation is broken for VSCode-Arduino  
