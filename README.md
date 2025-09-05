@@ -2,7 +2,7 @@
 ### situation
 [Arduino 2 was problematic for me.](https://blekenbleu.github.io/static/Arduino2/)  
 I installed [VSCode-Arduino Community](https://marketplace.visualstudio.com/items?itemName=vscode-arduino.vscode-arduino-community) without first uninstalling Arduino 2.  
-- VSCode-Arduino discovered that installation and used it.  
+- VSCode-Arduino discovered and used that Arduino 2 installation.  
 - programming STM32 boards by ST-Link in that installation is broken for VSCode-Arduino  
 
 *20 Aug 2025*  
@@ -11,14 +11,15 @@ I installed [VSCode-Arduino Community](https://marketplace.visualstudio.com/item
 	but `boards.txt`, `platform.txt` and `programmers.txt` lack `stlink` back to at least 2.5.0...  
 
 ## Enable ST-Link for [VSCode-Arduino](https://blekenbleu.github.io/static/VSCodeArduino/programming.htm):  
-- Download this ZIP and extract to a folder
-- Download an appropriate [**arduino-cli** release](https://github.com/arduino/arduino-cli/releases) and copy its executible here.
-- Configure vscode-arduino to find `arduino-cli` *in this folder*.  
-- adding `GenF4.programmer.default=stlink` in `boards.txt` was essential to Black Pill uploading.
-	- `Arduino: Upload` and `Arduino CLI: Upload` work;  
-	- `Arduino CLI: Upload using Programmer` does *NOT*  
+- Extract <a href=https://github.com/blekenbleu/STLink-vscode-arduino/archive/refs/heads/master.zip>this Download ZIP</a> to a folder
+- Download an appropriate [**arduino-cli** release](https://github.com/arduino/arduino-cli/releases) and copy its binary to that folder.
+- Configure vscode-arduino to find `arduino-cli` *in that folder*.  
+- adding `GenF4.programmer.default=stlink` in `boards.txt` was essential to Black Pill uploading.  
+	- Working:&nbsp; `Arduino: Upload` and `Arduino CLI: Upload`  
+	- *NOT* working:&nbsp; `Arduino CLI: Upload using Programmer`  
 		- `stlink.programmer.transport_script={runtime.platform.path}/debugger/select_hla.cfg`  
 			in `programmers.txt` did not help.  
+- This `boards.txt` has been hacked to work with STM32 Black Pill;
 - `boards.txt` **must be editted for each STM32 board *other than* Black Pill**,  
 	according to [stm32duino Arduino_Core_STM32 Commit f9a35fd](https://github.com/stm32duino/Arduino_Core_STM32/commit/f9a35fd714b889475e067d8c2c72c551ea3c0cba)
 	- that typically involves adding a single line `[whatever].programmer.default=stlink`  
@@ -37,18 +38,18 @@ I installed [VSCode-Arduino Community](https://marketplace.visualstudio.com/item
 - [**circuitstate.com** tutorial is IMO better](https://www.circuitstate.com/tutorials/how-to-use-vs-code-for-creating-and-uploading-arduino-sketches/);&nbsp;
 	[**electronics-lab.com** how-to](https://www.electronics-lab.com/project/programming-arduino-platform-io-arduino-extension-visual-studio-code-editor/) is also good
 	- MAKER-PRO Arduino extension on Visual Studio Code 2019 tutorial seems out of date
-- VSCode-Arduino extension wants Platform.io Extension *disabled*;&nbsp; Platform.io requires Arduino sketch changes
+- VSCode-Arduino extension wants Platform.io Extension *disabled*;<br> Platform.io requires Arduino sketch changes.
 
 
 
 ## Using Arduino-CLI - [official documentation](https://arduino.github.io/arduino-cli)
 
-VSCode-Arduino offers choosing CLI or IDE, with IDE option broken for Arduino 2.  
-While VSCode-Arduino bundles Arduino-CLI as
-`~\.vscode\extensions\vscode-arduino.vscode-arduino-community-0.7.2-win32-x64\assets\platform\win32-x64\arduino-cli\arduino-cli.exe`,  
-VSCore-Arduino does not use `arduino-cli` until added to PATH or VSCode-Arduino settings.  
+VSCode-Arduino offers choosing CLI or IDE, with IDE option broken, at least for Arduino 2.  
+While VSCode-Arduino bundles Arduino-CLI as<br>
+`~\.vscode\extensions\vscode-arduino.vscode*\assets\platform\win32-x64\arduino-cli\arduino-cli.exe`,  
+VSCore-Arduino does not use `arduino-cli.exe` until explicitly added to PATH or VSCode-Arduino settings.  
 
-In VSCode-Arduino, setting non-blank `Arduino: Path` breaks VSCore-Arduino F1 `arduino` menu
+VSCore-Arduino [F1] `arduino` menu breaks by setting non-blank `Arduino: Path`.
 - Arduino-CLI seemingly wants configuring outside VSCode-Arduino in `arduino-cli.yaml`  
 	Arduino-CLI stores a default data directory, based on `--config-dir string`  
 	and will search there for `arduino-cli.yaml`,  
